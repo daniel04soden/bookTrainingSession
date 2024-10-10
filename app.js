@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+// var mongoose = require('mongoose')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -18,6 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// const url = 'mongodb://127.0.0.1:27017/myapp'
+// mongoose.connect(url);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -39,3 +43,9 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+var port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Sever running on port ${port}`)
+});
